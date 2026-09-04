@@ -68,5 +68,3 @@ Place all written answers from `assignment-01.md` here for easier grading.
 
   - 3e
       If the two recursive calls are executed in parallel, the total work remains $O(n)$ because the same amount of computation is still performed. However, the span becomes $O(\log n)$ because only one branch of the recursion contributes to the critical path at each level of the divide-and-conquer process.
-      
-4. **GCD**
