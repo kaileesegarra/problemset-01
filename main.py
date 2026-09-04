@@ -5,12 +5,28 @@ See problemset-01.pdf for details.
 # no imports needed.
 
 def foo(a, b):
-    ### TODO
-    pass
+    if a == 0:
+        return b
+    elif b == 0:
+        return a
+
+    x = min(a, b)
+    y = max(a, b)
+
+    return foo(x, y % x)
 
 def longest_run(mylist, key):
-    ### TODO
-    pass
+    longest = 0
+    current = 0
+
+    for value in mylist:
+        if value == key:
+            current += 1
+            longest = max(longest, current)
+        else:
+            current = 0
+
+    return longest
 
 
 class Result:
@@ -30,5 +46,52 @@ class Result:
     
     
 def longest_run_recursive(mylist, key):
-    ### TODO
-    pass
+    # Base case: an empty list has no run
+    if len(mylist) == 0:
+        return Result(0, 0, 0, True)
+
+    # Base case: a list with one item
+    if len(mylist) == 1:
+        if mylist[0] == key:
+            return Result(1, 1, 1, True)
+        else:
+            return Result(0, 0, 0, False)
+
+    # Split the list into two halves
+    middle = len(mylist) // 2
+
+    # Recursively solve the left and right halves
+    left = longest_run_recursive(mylist[:middle], key)
+    right = longest_run_recursive(mylist[middle:], key)
+
+    # Determine the run length starting from the left edge
+    if left.is_entire_range:
+        left_size = left.left_size + right.left_size
+    else:
+        left_size = left.left_size
+
+    # Determine the run length ending at the right edge
+    if right.is_entire_range:
+        right_size = right.right_size + left.right_size
+    else:
+        right_size = right.right_size
+
+    # The longest run may be entirely on the left,entirely on the right, or cross the midpoint
+    longest_size = max(
+        left.longest_size,
+        right.longest_size,
+        left.right_size + right.left_size
+    )
+
+    # The entire range matches only if both halves completely match
+    is_entire_range = (
+        left.is_entire_range and right.is_entire_range
+    )
+
+    # Return the combined result for this section of the list
+    return Result(
+        left_size,
+        right_size,
+        longest_size,
+        is_entire_range
+    )
