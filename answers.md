@@ -1,7 +1,7 @@
   # CMPS 6610 Problem Set 01
 ## Answers
 
-**Kailee Segarra**
+**Kailee Segarra**gi
 
 
 Place all written answers from `assignment-01.md` here for easier grading.
@@ -55,6 +55,7 @@ Place all written answers from `assignment-01.md` here for easier grading.
 
   - 2b
       The function foo computes the greatest common divisor (GCD) of two integers. It repeatedly uses the remainder of the larger number divided by the smaller number until one of the values becomes zero. The remaining value is the GCD.
+      
   - 2c
       The work of foo is $O(\log n)$ because each recursive call reduces the size of the problem, and Euclid's algorithm takes a logarithmic number of recursive calls in the worst case. The span is also $O(\log n)$ because each recursive call depends on the result of the previous call, so the calls cannot be performed in parallel.
 
